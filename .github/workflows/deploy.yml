@@ -11,22 +11,24 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: npm install
-      # 文档编译命令，如果是 react 模板需要修改为 npm run docs:build
       - run: npm run build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # 文档目录，如果是 react 模板需要修改为 docs-dist
           publish_dir: ./dist
-      env:
-        GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
-        GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
-        GITHUB_REF: ${{ secrets.GITHUB_REF }}
-        GITHUB_SHA: ${{ secrets.GITHUB_SHA }}
-      # 添加以下语句进行调试
-      - run: |
-          echo "actor: $GITHUB_ACTOR"
-          echo "repository: $GITHUB_REPOSITORY"
-          echo "ref: $GITHUB_REF"
-          echo "sha: $GITHUB_SHA"
+    env:
+      GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
+      GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
+      GITHUB_REF: ${{ secrets.GITHUB_REF }}
+      GITHUB_SHA: ${{ secrets.GITHUB_SHA }}
+  debug:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Debug
+        run: |
+          echo "actor: ${{ env.GITHUB_ACTOR }}"
+          echo "repository: ${{ env.GITHUB_REPOSITORY }}"
+          echo "ref: ${{ env.GITHUB_REF }}"
+          echo "sha: ${{ env.GITHUB_SHA }}"
