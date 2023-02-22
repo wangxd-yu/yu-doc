@@ -19,3 +19,14 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           # 文档目录，如果是 react 模板需要修改为 docs-dist
           publish_dir: ./dist
+      env:
+        GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
+        GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
+        GITHUB_REF: ${{ secrets.GITHUB_REF }}
+        GITHUB_SHA: ${{ secrets.GITHUB_SHA }}
+      # 添加以下语句进行调试
+      - run: |
+          echo "actor: $GITHUB_ACTOR"
+          echo "repository: $GITHUB_REPOSITORY"
+          echo "ref: $GITHUB_REF"
+          echo "sha: $GITHUB_SHA"
