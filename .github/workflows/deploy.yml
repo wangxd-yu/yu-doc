@@ -13,22 +13,8 @@ jobs:
       - run: npm install
       - run: npm run build
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-    env:
-      GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
-      GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
-      GITHUB_REF: ${{ secrets.GITHUB_REF }}
-      GITHUB_SHA: ${{ secrets.GITHUB_SHA }}
-  debug:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - name: Debug
-        run: |
-          echo "actor: ${{ env.GITHUB_ACTOR }}"
-          echo "repository: ${{ env.GITHUB_REPOSITORY }}"
-          echo "ref: ${{ env.GITHUB_REF }}"
-          echo "sha: ${{ env.GITHUB_SHA }}"
+
